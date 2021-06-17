@@ -91,8 +91,9 @@ document.addEventListener("DOMContentLoaded", function(){
 }); 
 // DOMContentLoaded  end
 
+// verify password
 $(document).ready(function(){
-    $("#inputPassword2").keyup(function(){
+    $("#inputPassword2").keyup(function () {
         if ($("#inputPassword1").val() == $("#inputPassword2").val()) {
             $("#inputPassword1").removeClass("is-invalid");
             $("#inputPassword2").removeClass("is-invalid");
@@ -100,7 +101,7 @@ $(document).ready(function(){
             $("#inputPassword1").addClass("is-valid");
             $("#inputPassword2").addClass("is-valid");
         }
-        else ($("#inputPassword1").val() != $("#inputPassword2").val()) {
+        else if ($("#inputPassword1").val() != $("#inputPassword2").val()) {
             $("#inputPassword1").removeClass("is-valid");
             $("#inputPassword2").removeClass("is-valid");
             
@@ -110,6 +111,7 @@ $(document).ready(function(){
     });
 });
 
+// Checkbox
 function clickCheckbox() {
     enabledCheck = document.getElementById('customCheck1').checked;
     if(enabledCheck){
@@ -120,6 +122,53 @@ function clickCheckbox() {
     }; 
 }
 
+$(function () {
+    // Add Modal
+    $('#addData').on('click', function () {
+        $('#formModalLabel').html('Tambah Data Mahasiswa Baru');
+        $('#buttonData').html('Tambah Data');
+        
+        $('#inputName1').val('');
+        $('#inputEmail1').val('');
+        $('#inputPhone1').val('');
+        $('#inputAddress1').val('');
+        $('#inputDepartment1').val('');
+        $('#inputRegistType').val('');
+        $('#inputGenderType').val('');
+        $('#inputPassword1').val('');
+        $('#inputReligion1').val('');
+    });
+    
+    // Edit Modal
+    $('#editData').on('click', function () {
+        $('#formModalLabel').html('Edit Data Mahasiswa');
+        $('#buttonData').html('Edit Data');
+        $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/updateData')
+        
+        const id = $(this).data('id');
+        
+        $.ajax({
+            url: 'http://localhost:8080/penerimaan_mhs/public/home/getInfoData',
+            data: {id : id},
+            method: 'post',
+            dataType: 'json',
+            success: function(data) {
+                data2 = $('#hiddenID').val(data.id);
+                $('#inputName1').val(data.NAMA_MAHASISWA);
+                $('#inputEmail1').val(data.EMAIL_MAHASISWA);
+                $('#inputPhone1').val(data.NHP_MAHASISWA);
+                $('#inputAddress1').val(data.ALAMAT_MAHASISWA);
+                $('#inputDepartment1').val(data.JURUSAN_MAHASISWA);
+                $('#inputRegistType').val(data.TIPE_MAHASISWA);
+                $('#inputGenderType').val(data.JK_MAHASISWA);
+                $('#inputReligion1').val(data.AGAMA_MAHASISWA);
+                $('#inputPassword1').val(data.PASSWORD_MAHASISWA);
+                
+                console.log(data2);
+            }
+        });
+    });
+});
 
 // Waves
 Waves.init();
@@ -130,7 +179,12 @@ Waves.attach('.toast', ['waves-float']);
 
 // Toasts
 $(document).ready(function(){
-    $('.toast').toast('show');
+    if($('.toast')) {
+        $('.toast').toast('show');
+    }
+    else {
+        $('.toast').toast('hide');
+    }
 });
 
 // Wow

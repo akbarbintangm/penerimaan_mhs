@@ -27,40 +27,43 @@
             $this->view('templates/header_bottom');
         }
         public function addData() {
-            $data['HTMLtitle'] = 'Add Data - Form CRUD';
-            $data['mahasiswa'] = $this->model('MHS_model')->getAllMHS();
-            
-            $this->view('templates/header_top');
-            $this->view('templates/header', $data);
-            
-            $this->view('home/addData', $data);
-            
-            $this->view('templates/footer');
-            $this->view('templates/header_bottom');
+            if( $this->model('MHS_Model')->addIdMHS($_POST) > 0) {
+                FlashMessage::setFlash('berhasil', 'ditambahkan', 'success');
+                header('Location: '. BASEURL . '/home');
+                exit;
+            }
+            else {
+                FlashMessage::setFlash('gagal', 'ditambahkan', 'danger');
+                header('Location: '. BASEURL . '/home');
+                exit;
+            }
+        }
+        public function getInfoData() {
+            echo json_encode($this->model('MHS_model')->getIdMHS($_POST['id']));
         }
         public function updateData() {
-            $data['HTMLtitle'] = 'Update Data - Form CRUD';
-            $data['mahasiswa'] = $this->model('MHS_model')->getAllMHS();
-            
-            $this->view('templates/header_top');
-            $this->view('templates/header', $data);
-            
-            $this->view('home/updateData', $data);
-            
-            $this->view('templates/footer');
-            $this->view('templates/header_bottom');
+            if( $this->model('MHS_Model')->updateIdMHS($_POST) > 0) {
+                FlashMessage::setFlash('berhasil', 'diubah', 'success');
+                header('Location: '. BASEURL . '/home');
+                exit;
+            }
+            else {
+                FlashMessage::setFlash('gagal', 'diubah', 'danger');
+                header('Location: '. BASEURL . '/home');
+                exit;
+            }
         }
         public function deleteData($id) {
-            $data['HTMLtitle'] = 'Delete Data - Form CRUD';
-            $data['mahasiswa'] = $this->model('MHS_model')->deleteIdMHS($id);
-            
-            $this->view('templates/header_top');
-            $this->view('templates/header', $data);
-            
-            $this->view('home/deleteData', $data);
-            
-            $this->view('templates/footer');
-            $this->view('templates/header_bottom');
+            if( $this->model('MHS_Model')->deleteIdMHS($id) >= 0) {
+                FlashMessage::setFlash('berhasil', 'dihapus', 'success');
+                header('Location: '. BASEURL . '/home');
+                exit;
+            }
+            else {
+                FlashMessage::setFlash('gagal', 'dihapus', 'danger');
+                header('Location: '. BASEURL . '/home');
+                exit;
+            }
         }
     }
 ?>

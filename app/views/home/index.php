@@ -5,9 +5,24 @@
                 <h3 class="font-weight-light" id="infoTable">Data Mahasiswa</h3>
                 <label class="text-secondary" for="infoTable">Klik <i class="font-weight-bold">Edit</i> atau <i class="font-weight-bold">Hapus</i> jika ingin mengubahnya.</label>
                 <a href="" class="btn btn btn-primary rounded shadow">Refresh Data</a>
-                <a data-toggle="modal" data-target="#addModal" class="btn btn btn-warning rounded shadow">Tambah Data</a>
-                <br><br>
+                <a data-toggle="modal" data-target="#formModal" class="btn btn btn-warning rounded shadow" id="addData">Tambah Data</a>
                 <br>
+                <div class="row justify-content-end mt-5">
+                    <div class="col-lg-6">
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="name" name="inputSearch1" class="form-control shadow" id="inputSearch1" placeholder="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-label="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-describedby="searchData">
+                                    <div class="input-group-append">
+                                        <button type="button" name="searchData" class="btn btn-primary shadow" id="searchData">Button</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <table class="text-left table table-hover table-responsive-xl">
@@ -17,7 +32,7 @@
                                     <th scope="col">NPM</th>
                                     <th scope="col">Nama Mahasiswa</th>
                                     <th scope="col">Jurusan</th>
-                                    <th scope="col" colspan="2">Aksi</th>
+                                    <th scope="col" colspan="3">Aksi</th>
                                 </tr>
                             </thead>
                                 
@@ -25,10 +40,11 @@
                                 <?php $no=1; foreach( $data['mahasiswa'] as $rowMahasiswa) : ?>
                                     <tr>
                                         <td scope="row"><?= $no++ ?></td>
-                                        <td><?= $rowMahasiswa['NPM_MAHASISWA']; ?></td>
+                                        <td><?php if($rowMahasiswa['NPM_MAHASISWA'] == '') { echo 'Tidak ada Data';} else { echo $rowMahasiswa['NPM_MAHASISWA'];} ?></td>
                                         <td><?= $rowMahasiswa['NAMA_MAHASISWA']; ?></td>
                                         <td><?= $rowMahasiswa['JURUSAN_MAHASISWA']; ?></td>
-                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/viewData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" class="btn btn-primary shadow rounded btn-block d-block">EDIT</a></td>
+                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/viewData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" class="btn btn-success shadow rounded btn-block d-block">LIHAT</a></td>
+                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/updateData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-primary shadow rounded btn-block d-block" id="editData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">EDIT</a></td>
                                         <td class="text-center"><a href="<?= BASEURL; ?>/home/deleteData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" onclick="confirm();" class="btn btn-danger shadow rounded btn-block d-block">HAPUS</a></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -41,16 +57,17 @@
     </div>
     
     <!-- Login Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content shadow-lg">
                 <div class="modal-header bg-light text-dark">
-                    <h5 class="modal-title" id="addModalLabel">Tambah Data Mahasiswa Baru</h5>
+                    <h5 class="modal-title" id="formModalLabel">...</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="POST">
+                <form action="<?= BASEURL; ?>/home/addData/" method="POST" enctype="multipart/form-data" id="formMHS">
+                    <input type="hidden" name="hiddenID" id="id">
                     <div class="modal-body bg-light text-dark">
                         <div class="row">
                             <div class="col-lg">
@@ -68,18 +85,30 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">+62</span>
                                         </div>
-                                        <input type="number" name="inputPhone1" class="form-control shadow" placeholder="Masukkan Nomor HP" aria-label="Number Phone" aria-describedby="basic-addon1" required="required">
+                                        <input type="number" name="inputPhone1" id="inputPhone1" class="form-control shadow" placeholder="Masukkan Nomor HP" aria-label="Number Phone" aria-describedby="basic-addon1" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputAddress1">Alamat Mahasiswa</label>
-                                    <textarea type="address" name="inputAddress1" class="form-control shadow" id="inputAddress1" placeholder="Masukkan Alamat" aria-describedby="addressHelp" required="required"></textarea>
+                                    <textarea type="address" name="inputAddress1" class="form-control shadow" id="inputAddress1" placeholder="Masukkan Alamat" aria-describedby="addressHelp" required="required" style="height: 125px;"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg">
                                 <div class="form-group">
+                                    <label for="inputReligion1">Agama Mahasiswa</label>
+                                    <select class="custom-select shadow" name="inputReligion1" id="inputReligion1" required="required">
+                                        <option selected>Pilih Agama</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Protestan">Protestan</option>
+                                        <option value="Katolik">Katolik</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Buddha">Buddha</option>
+                                        <option value="Khonghucu">Khonghucu</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="inputDepartment1">Jurusan Mahasiswa</label>
-                                    <select class="custom-select shadow" name="inputDepartment1" required="required">
+                                    <select class="custom-select shadow" name="inputDepartment1" id="inputDepartment1" required="required">
                                         <option selected>Pilih Jurusan</option>
                                         <option value="Sistem Informasi">Sistem Informasi</option>
                                         <option value="Sistem Komputer">Sistem Komputer</option>
@@ -91,7 +120,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="inputRegistType">Jalur Pendaftaran</label>
-                                            <select class="custom-select shadow" name="inputRegistType" required="required">
+                                            <select class="custom-select shadow" name="inputRegistType" id="inputRegistType" required="required">
                                                 <option selected>Pilih Tipe</option>
                                                 <option value="Reguler">Reguler</option>
                                                 <option value="Undangan">Undangan</option>
@@ -102,7 +131,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="inputGenderType">Jenis Kelamin</label>
-                                            <select class="custom-select shadow" name="inputGenderType">
+                                            <select class="custom-select shadow" name="inputGenderType" id="inputGenderType" required="required">
                                                 <option selected>Pilih Kelamin</option>
                                                 <option value="Pria">Pria</option>
                                                 <option value="Wanita">Wanita</option>
@@ -123,10 +152,17 @@
                     </div>
                     <div class="modal-footer bg-light text-dark">
                         <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary shadow" name="addData">Input Data</button>
+                        <button type="submit" class="btn btn-primary shadow" name="buttonData" id="buttonData">Input Data</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+        <div style="position: fixed; right: 20px; bottom: 20px;" class="animate__animated animate__slideInRight">
+            <?php FlashMessage::flashmessage(); ?>
+        </div>
+    </div>
+    
 </body>
