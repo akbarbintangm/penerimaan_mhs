@@ -1,3 +1,0 @@
-<body>
-    UPDATE DATA
-</body>

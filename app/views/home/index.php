@@ -67,7 +67,7 @@
                     </button>
                 </div>
                 <form action="<?= BASEURL; ?>/home/addData/" method="POST" enctype="multipart/form-data" id="formMHS">
-                    <input type="hidden" name="hiddenID" id="id">
+                    <input type="hidden" name="hiddenID" id="hiddenID">
                     <div class="modal-body bg-light text-dark">
                         <div class="row">
                             <div class="col-lg">

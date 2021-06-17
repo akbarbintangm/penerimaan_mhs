@@ -39,7 +39,7 @@
             }
         }
         public function getInfoData() {
-            echo json_encode($this->model('MHS_model')->getIdMHS($_POST['id']));
+            echo json_encode($this->model('MHS_model')->getIdMHS($_POST['ID_MAHASISWA']));
         }
         public function updateData() {
             if( $this->model('MHS_Model')->updateIdMHS($_POST) > 0) {

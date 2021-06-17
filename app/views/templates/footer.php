@@ -8,7 +8,7 @@
 <script src="<?= BASEURL ?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom -->
-<script src="<?= BASEURL ?>/library/js/main.js"></script>
+<script src="<?= BASEURL ?>/library/js/main.min.js"></script>
 
 <!-- PHP Properties 
     NAMA    : AKBAR BINTANG MAHENDRA

@@ -132,11 +132,11 @@ $(function () {
         $('#inputEmail1').val('');
         $('#inputPhone1').val('');
         $('#inputAddress1').val('');
-        $('#inputDepartment1').val('');
-        $('#inputRegistType').val('');
-        $('#inputGenderType').val('');
+        $('#inputDepartment1').val('Pilih Jurusan');
+        $('#inputRegistType').val('Pilih Tipe');
+        $('#inputGenderType').val('Pilih Kelamin');
         $('#inputPassword1').val('');
-        $('#inputReligion1').val('');
+        $('#inputReligion1').val('Piih Agama');
     });
     
     // Edit Modal
@@ -149,11 +149,11 @@ $(function () {
         
         $.ajax({
             url: 'http://localhost:8080/penerimaan_mhs/public/home/getInfoData',
-            data: {id : id},
+            data: {ID_MAHASISWA : id},
             method: 'post',
             dataType: 'json',
             success: function(data) {
-                data2 = $('#hiddenID').val(data.id);
+                $('#hiddenID').val(data.ID_MAHASISWA);
                 $('#inputName1').val(data.NAMA_MAHASISWA);
                 $('#inputEmail1').val(data.EMAIL_MAHASISWA);
                 $('#inputPhone1').val(data.NHP_MAHASISWA);
@@ -163,8 +163,6 @@ $(function () {
                 $('#inputGenderType').val(data.JK_MAHASISWA);
                 $('#inputReligion1').val(data.AGAMA_MAHASISWA);
                 $('#inputPassword1').val(data.PASSWORD_MAHASISWA);
-                
-                console.log(data2);
             }
         });
     });
