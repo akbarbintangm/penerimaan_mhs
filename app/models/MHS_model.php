@@ -84,10 +84,16 @@
             return $this->db->rowCount();
         }
         
-        public function deleteIdMHS($id) {
-            $this->db->query('DELETE FROM ' . $this->tablePrimary .' WHERE ID_MAHASISWA=:id');
-            $this->db->bind('id', $id);
+        public function deleteIdMHS($data) {
+            $this->db->query('DELETE FROM ' . $this->tablePrimary .' WHERE ID_MAHASISWA=:ID_MAHASISWA');
+            $this->db->bind('ID_MAHASISWA', $data['hiddenID']);
             return $this->db->resultSingle();
         }
+        public function searchIdMHS() {
+            $searchInput = $_POST['inputSearch1'];
+            $this->db->query('SELECT * FROM '. $this->tablePrimary .' WHERE NAMA_MAHASISWA LIKE :searchInput OR NPM_MAHASISWA LIKE :searchInput');
+            $this->db->bind('searchInput', "%$searchInput%");
+            return $this->db->resultAll();
+        }   
     }
 ?>

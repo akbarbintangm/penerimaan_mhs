@@ -9,10 +9,10 @@
                 <br>
                 <div class="row justify-content-end mt-5">
                     <div class="col-lg-6">
-                        <form>
+                        <form action="<?= BASEURL; ?>/home/searchData" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <div class="input-group mb-3">
-                                    <input type="name" name="inputSearch1" class="form-control shadow" id="inputSearch1" placeholder="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-label="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-describedby="searchData">
+                                    <input type="name" name="inputSearch1" class="form-control shadow" id="inputSearch1" placeholder="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-label="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-describedby="searchData" autocomplete="off">
                                     <div class="input-group-append">
                                         <button type="button" name="searchData" class="btn btn-primary shadow" id="searchData">Button</button>
                                     </div>
@@ -38,6 +38,12 @@
                                 
                             <tbody>
                                 <?php $no=1; foreach( $data['mahasiswa'] as $rowMahasiswa) : ?>
+                                    <?php if($rowMahasiswa['ID_MAHASISWA'] < 1) { ?>
+                                    <tr>
+                                        <td scope="row" colspan="">Tidak ada data.</td>
+                                    </tr>
+                                    <?php }
+                                    else { ?>
                                     <tr>
                                         <td scope="row"><?= $no++ ?></td>
                                         <td><?php if($rowMahasiswa['NPM_MAHASISWA'] == '') { echo 'Tidak ada Data';} else { echo $rowMahasiswa['NPM_MAHASISWA'];} ?></td>
@@ -45,9 +51,9 @@
                                         <td><?= $rowMahasiswa['JURUSAN_MAHASISWA']; ?></td>
                                         <td class="text-center"><a href="<?= BASEURL; ?>/home/viewData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" class="btn btn-success shadow rounded btn-block d-block">LIHAT</a></td>
                                         <td class="text-center"><a href="<?= BASEURL; ?>/home/updateData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-primary shadow rounded btn-block d-block editData" id="editData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">EDIT</a></td>
-                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/deleteData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" onclick="confirm();" class="btn btn-danger shadow rounded btn-block d-block">HAPUS</a></td>
+                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/deleteData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-danger shadow rounded btn-block d-block deleteData" id="editData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">HAPUS</a></td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php } endforeach; ?>
                             </tbody>
                         </table>
                     </div>  
@@ -66,10 +72,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= BASEURL; ?>/home/addData/" method="POST" enctype="multipart/form-data" id="formMHS">
+                <form action="<?= BASEURL; ?>/home/addData" method="POST" enctype="multipart/form-data" id="formMHS">
                     <input type="hidden" name="hiddenID" id="hiddenID">
                     <div class="modal-body bg-light text-dark">
-                        <div class="row">
+                        <div class="row" id="standardData">
                             <div class="col-lg">
                                 <div class="form-group">
                                     <label for="inputName1">Nama Mahasiswa</label>
