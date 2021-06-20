@@ -95,5 +95,8 @@
             $this->db->bind('searchInput', "%$searchInput%");
             return $this->db->resultAll();
         }   
+        public function file_details($data) {
+            $this->db->insert('image_table', $data);
+        }
     }
 ?>

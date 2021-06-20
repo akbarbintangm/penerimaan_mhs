@@ -26,7 +26,7 @@ $(document).ready(function($) {
         target: '#mainNav',
         offset: 75
     });
-    
+
     // Verify Password
     $("#inputPassword2").keyup(function () {
         if ($("#inputPassword1").val() == $("#inputPassword2").val()) {
@@ -43,23 +43,21 @@ $(document).ready(function($) {
         }
     });
     
-    // Modal Add & Edit Data
+    // Modal Add & Edit 
     // Add Modal
     $('.addData').on('click', function () {
-        $('#modal-type').removeClass("modal-xl");
-        $('#modal-type').addClass("modal-lg");
+        $('#modal-type').removeClass("modal-xl").addClass("modal-lg");
         $('#formModalLabel').html('Tambah Data Mahasiswa Baru');
-        $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/addData')
-        $('#buttonData').html('Tambah Data');
-        $('#extendedData').removeClass("d-block");
-        $('#extendedData').addClass("d-none");
-        $('#standardData').removeClass("d-none");
+        $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/addData');
+        $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Tambah Data');
+        $('#extendedData').removeClass("d").addClass("d-none");
+        $('#standardData').removeClass("d-none").addClass("d");
         $('#inputNPM1').removeAttr('required', 'required');
         $('#inputDate1').removeAttr('required', 'required');
         $('#inputUsername1').removeAttr('required', 'required');
         $('#inputPhoto1').removeAttr('required', 'required');
         $('.checkStatues').removeAttr('required', 'required');
-        
+        $('#forValidate').removeClass("d-block").addClass("d-none");
         
         $('#inputName1').val('');
         $('#inputEmail1').val('');
@@ -74,19 +72,17 @@ $(document).ready(function($) {
     
     // Edit Modal
     $('.editData').on('click', function () {
-        $('#modal-type').removeClass("modal-lg");
-        $('#modal-type').addClass("modal-xl");
+        $('#modal-type').removeClass("modal-lg").addClass("modal-xl");
         $('#formModalLabel').html('Edit Mahasiswa - ');
-        $('#buttonData').html('Edit Data');
+        $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Edit Data');
         $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/updateData')
-        $('#extendedData').removeClass("d-none");
-        $('#extendedData').addClass("d-block");
-        $('#standardData').removeClass("d-none");
-        $('#inputNPM1').Attr('required', 'required');
-        $('#inputDate1').Attr('required', 'required');
-        $('#inputUsername1').Attr('required', 'required');
-        $('#inputPhoto1').Attr('required', 'required');
-        $('.checkStatues').Attr('required', 'required');
+        $('#extendedData').removeClass("d-none").addClass("d");
+        $('#standardData').removeClass("d-none").addClass("d");
+        $('#inputNPM1').attr('required', 'required');
+        $('#inputDate1').attr('required', 'required');
+        $('#inputUsername1').attr('required', 'required');
+        $('#inputPhoto1').attr('required', 'required');
+        $('#forValidate').removeClass("d-block").addClass("d-none");
         
         const id = $(this).data('id');
         
@@ -141,9 +137,9 @@ $(document).ready(function($) {
         $('#formModalLabel').html('Hapus Mahasiswa - ');
         $('#buttonData').addClass("btn-danger").removeClass("btn-primary").html('Hapus Data');
         $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/deleteData')
-        $('#extendedData').removeClass("d-none");
-        $('#standardData').addClass("d-none");
-        $('#hiddenID').addClass("d-block");
+        $('#extendedData').removeClass("d").addClass("d-none");
+        $('#standardData').removeClass("d").addClass("d-none");
+        $('#hiddenID').addClass("d");
         
         const id = $(this).data('id');
         
@@ -161,10 +157,134 @@ $(document).ready(function($) {
                 }
                 
                 $('#hiddenID').val(data.ID_MAHASISWA);
-                $('.modal-body').html('Hapus data ').append(data.NAMA_MAHASISWA).append('?');
+                $('#forValidate').addClass("d-block").html('Hapus data ').append(data.NAMA_MAHASISWA).append('?');
             }
         });
     });
+    
+    // Verify Inputs
+    $("#inputNPM1").keyup(function () {
+        if ($("#inputNPM1").val()) {
+            $("#inputNPM1").removeClass("is-invalid");
+            $("#inputNPM1").addClass("is-valid");
+        }
+        else {
+            $("#inputNPM1").removeClass("is-valid");
+            $("#inputNPM1").addClass("is-invalid");
+        }
+    });
+    $("#inputName1").keyup(function () {
+        if ($("#inputName1").val()) {
+            $("#inputName1").removeClass("is-invalid");
+            $("#inputName1").addClass("is-valid");
+        }
+        else {
+            $("#inputName1").removeClass("is-valid");
+            $("#inputName1").addClass("is-invalid");
+        }
+    });
+    $("#inputDepartment1").keyup(function () {
+        if ($("#inputDepartment1").val()) {
+            $("#inputDepartment1").removeClass("is-invalid");
+            $("#inputDepartment1").addClass("is-valid");
+        }
+        else {
+            $("#inputDepartment1").removeClass("is-valid");
+            $("#inputDepartment1").addClass("is-invalid");
+        }
+    }); 
+    $("#inputRegistType").keyup(function () {
+        if ($("#inputRegistType").val()) {
+            $("#inputRegistType").removeClass("is-invalid");
+            $("#inputRegistType").addClass("is-valid");
+        }
+        else {
+            $("#inputRegistType").removeClass("is-valid");
+            $("#inputRegistType").addClass("is-invalid");
+        }
+    });
+    $("#inputDate1").keyup(function () {
+        if ($("#inputDate1").val()) {
+            $("#inputDate1").removeClass("is-invalid");
+            $("#inputDate1").addClass("is-valid");
+        }
+        else {
+            $("#inputDate1").removeClass("is-valid");
+            $("#inputDate1").addClass("is-invalid");
+        }
+    });
+    $("#inputGenderType").keyup(function () {
+        if ($("#inputGenderType").val()) {
+            $("#inputGenderType").removeClass("is-invalid");
+            $("#inputGenderType").addClass("is-valid");
+        }
+        else {
+            $("#inputGenderType").removeClass("is-valid");
+            $("#inputGenderType").addClass("is-invalid");
+        }
+    });
+    $("#inputReligion1").keyup(function () {
+        if ($("#inputReligion1").val()) {
+            $("#inputReligion1").removeClass("is-invalid");
+            $("#inputReligion1").addClass("is-valid");
+        }
+        else {
+            $("#inputReligion1").removeClass("is-valid");
+            $("#inputReligion1").addClass("is-invalid");
+        }
+    });
+    $("#inputAddress1").keyup(function () {
+        if ($("#inputAddress1").val()) {
+            $("#inputAddress1").removeClass("is-invalid");
+            $("#inputAddress1").addClass("is-valid");
+        }
+        else {
+            $("#inputAddress1").removeClass("is-valid");
+            $("#inputAddress1").addClass("is-invalid");
+        }
+    });
+    $("#inputPhone1").keyup(function () {
+        if ($("#inputPhone1").val()) {
+            $("#inputPhone1").removeClass("is-invalid");
+            $("#inputPhone1").addClass("is-valid");
+        }
+        else {
+            $("#inputPhone1").removeClass("is-valid");
+            $("#inputPhone1").addClass("is-invalid");
+        }
+    });
+    $("#inputEmail1").keyup(function () {
+        if ($("#inputEmail1").val()) {
+            $("#inputEmail1").removeClass("is-invalid");
+            $("#inputEmail1").addClass("is-valid");
+        }
+        else {
+            $("#inputEmail1").removeClass("is-valid");
+            $("#inputEmail1").addClass("is-invalid");
+        }
+    });
+    $("#inputPhoto1").keyup(function () {
+        if ($("#inputPhoto1").val()) {
+            $("#inputPhoto1").removeClass("is-invalid");
+            $("#inputPhoto1").addClass("is-valid");
+        }
+        else {
+            $("#inputPhoto1").removeClass("is-valid");
+            $("#inputPhoto1").addClass("is-invalid");
+        }
+    });
+    $("#inputUsername1").keyup(function () {
+        if ($("#inputUsername1").val()) {
+            $("#inputUsername1").removeClass("is-invalid");
+            $("#inputUsername1").addClass("is-valid");
+        }
+        else {
+            $("#inputUsername1").removeClass("is-valid");
+            $("#inputUsername1").addClass("is-invalid");
+        }
+    });
+
+    // checkStatues1
     
     // Agreement Checkbox
     enabledCheck = document.getElementById('customCheck1').checked;
