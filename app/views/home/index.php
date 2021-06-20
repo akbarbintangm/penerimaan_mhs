@@ -5,7 +5,7 @@
                 <h3 class="font-weight-light" id="infoTable">Data Mahasiswa</h3>
                 <label class="text-secondary" for="infoTable">Klik <i class="font-weight-bold">Edit</i> atau <i class="font-weight-bold">Hapus</i> jika ingin mengubahnya.</label>
                 <a href="" class="btn btn btn-primary rounded shadow">Refresh Data</a>
-                <a data-toggle="modal" data-target="#formModal" class="btn btn btn-warning rounded shadow" id="addData">Tambah Data</a>
+                <a data-toggle="modal" data-target="#formModal" class="btn btn btn-warning rounded shadow addData" id="addData">Tambah Data</a>
                 <br>
                 <div class="row justify-content-end mt-5">
                     <div class="col-lg-6">
@@ -44,7 +44,7 @@
                                         <td><?= $rowMahasiswa['NAMA_MAHASISWA']; ?></td>
                                         <td><?= $rowMahasiswa['JURUSAN_MAHASISWA']; ?></td>
                                         <td class="text-center"><a href="<?= BASEURL; ?>/home/viewData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" class="btn btn-success shadow rounded btn-block d-block">LIHAT</a></td>
-                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/updateData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-primary shadow rounded btn-block d-block" id="editData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">EDIT</a></td>
+                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/updateData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-primary shadow rounded btn-block d-block editData" id="editData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">EDIT</a></td>
                                         <td class="text-center"><a href="<?= BASEURL; ?>/home/deleteData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" onclick="confirm();" class="btn btn-danger shadow rounded btn-block d-block">HAPUS</a></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -58,7 +58,7 @@
     
     <!-- Login Modal -->
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg" id="modal-type">
             <div class="modal-content shadow-lg">
                 <div class="modal-header bg-light text-dark">
                     <h5 class="modal-title" id="formModalLabel">...</h5>
@@ -146,6 +146,40 @@
                                 <div class="form-group">
                                     <label for="inputPassword2">Password Ulang</label>
                                     <input type="password" name="inputPassword2" class="form-control shadow" id="inputPassword2" placeholder="Masukkan Password" aria-describedby="repasswordHelp" required="required">
+                                </div>
+                            </div>
+                            <div class="col-lg" id="extendedData">
+                                <div class="form-group">
+                                    <label for="inputNPM1">NPM Mahasiswa</label>
+                                    <input type="number" name="inputNPM1" class="form-control shadow" id="inputNPM1" placeholder="Masukkan NPM Mahasiswa" aria-describedby="npmHelp" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDate1">TTL Mahasiswa</label>
+                                    <input type="date" name="inputDate1" class="form-control shadow" id="inputDate1" placeholder="Masukkan TTL Mahasisa" aria-describedby="dateHelp" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputUsername1">Username Mahasiswa</label>
+                                    <input type="name" name="inputUsername1" class="form-control shadow" id="inputUsername1" placeholder="Masukkan Username Mahasiswa" aria-describedby="usernameHelp" required="required">
+                                </div>
+                                <p class="mb-2">Foto Mahasiswa</p>
+                                <div class="custom-file">
+                                    <input type="file" name="inputPhoto1" class="custom-file-input shadow" id="inputPhoto1" placeholder="Pilih File..." aria-describedby="photoHelp" required="required">
+                                    <label class="custom-file-label shadow" for="inputPhoto1" id="inputPhoto">Pilih file...</label>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="inputDate1">Status Mahasiswa (Pilih Salah Satu)</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input checkStatues" id="inputCheckData1" name="checkStatues1[]" value="Mahasiswa Baru">
+                                        <label class="custom-control-label" for="inputCheckData1">Mahasiswa Baru</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mt-1">
+                                        <input type="checkbox" class="custom-control-input checkStatues" id="inputCheckData2" name="checkStatues1[]" value="Mahasiswa Tetap">
+                                        <label class="custom-control-label" for="inputCheckData2">Mahasiswa Tetap</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mt-1">
+                                        <input type="checkbox" class="custom-control-input checkStatues" id="inputCheckData3" name="checkStatues1[]" value="Mahasiswa Drop Out">
+                                        <label class="custom-control-label" for="inputCheckData3">Mahasiswa Drop Out</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
