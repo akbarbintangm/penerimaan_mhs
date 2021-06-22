@@ -1,7 +1,5 @@
 // Init for Jquery
-$(document).ready(function($) {
-    "use strict"; // Start of use strict  
-    
+$(document).ready(function() {
     // Back to Top or Scroll to() Script
     $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -15,18 +13,24 @@ $(document).ready(function($) {
             }
         }
     });
-    
+}); 
+
+$(document).ready(function() {    
     // Closes responsive menu when a scroll trigger link is clicked
     $('.js-scroll-trigger').click(function() {
         $('.navbar-collapse').collapse('hide');
     });
-    
+}); 
+
+$(document).ready(function() {    
     // Activate scrollspy to add active class to navbar items on scroll
     $('body').scrollspy({
         target: '#mainNav',
         offset: 75
     });
+}); 
 
+$(document).ready(function() {    
     // Verify Password
     $("#inputPassword2").keyup(function () {
         if ($("#inputPassword1").val() == $("#inputPassword2").val()) {
@@ -42,47 +46,106 @@ $(document).ready(function($) {
             $("#inputPassword2").addClass("is-invalid");
         }
     });
-    
+}); 
+
+$(document).ready(function() {        
     // Modal Add & Edit 
     // Add Modal
     $('.addData').on('click', function () {
         $('#modal-type').removeClass("modal-xl").addClass("modal-lg");
         $('#formModalLabel').html('Tambah Data Mahasiswa Baru');
         $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/addData');
-        $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Tambah Data');
+        $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Tambah Data').attr('disabled', 'disabled');
         $('#extendedData').removeClass("d").addClass("d-none");
         $('#standardData').removeClass("d-none").addClass("d");
+        
+        $('#hiddenID').attr('required', 'required');
+
+        $('#inputName1').attr('required', 'required');
+        $('#inputDepartment1').attr('required', 'required');
+        $('#inputRegistType').attr('required', 'required');
+        $('#inputGenderType').attr('required', 'required');
+        $('#inputReligion1').attr('required', 'required');
+        $('#inputAddress1').attr('required', 'required');
+        $('#inputPhone1').attr('required', 'required');
+        $('#inputEmail1').attr('required', 'required');
+        $('#inputPassword1').attr('required', 'required');
+        $('#inputPassword2').removeAttr('disabled', 'disabled').attr('required', 'required');
+        
+        $('#inputCheckRePassword1').attr('disabled', 'disabled');
+        $('#formCheckRePassword1').addClass('d-none').removeClass('d');
+        
+        $('#inputSemester1').removeAttr('required', 'required');
         $('#inputNPM1').removeAttr('required', 'required');
         $('#inputDate1').removeAttr('required', 'required');
         $('#inputUsername1').removeAttr('required', 'required');
-        $('#inputPhoto1').removeAttr('required', 'required');
+        //$('#inputPhoto1').removeAttr('required', 'required');
         $('.checkStatues').removeAttr('required', 'required');
+        $('#inputDO1').removeAttr('required', 'required');
+        $('#inputDO2').removeAttr('required', 'required');
         $('#forValidate').removeClass("d-block").addClass("d-none");
+        $('#hiddenID').addClass("d");
         
+        $('#hiddenID').val('');
+        $('#inputNPM1').val('');
         $('#inputName1').val('');
-        $('#inputEmail1').val('');
-        $('#inputPhone1').val('');
-        $('#inputAddress1').val('');
         $('#inputDepartment1').val('Pilih Jurusan');
         $('#inputRegistType').val('Pilih Tipe');
+        $('#inputDate1').val('');
         $('#inputGenderType').val('Pilih Kelamin');
-        $('#inputPassword1').val('');
         $('#inputReligion1').val('Pilih Agama');
+        $('#inputAddress1').val('');
+        $('#inputPhone1').val('');
+        $('#inputEmail1').val('');
+        //$('#inputPhoto1').val('');
+        $('#inputUsername1').val('');
+        $('#inputPassword1').val('');
+        $('#inputPassword2').val('');
+        $('#inputSemester1').val('');
+
+        $('#inputCheckAgreement1').change(function() {
+            if ($('#inputCheckAgreement1:checked').length > 0) {
+                $('#buttonData').removeAttr('disabled', 'disabled');
+            } else {
+                $('#buttonData').attr('disabled', 'disabled');
+            }
+        });
     });
-    
+}); 
+
+$(document).ready(function() {        
     // Edit Modal
     $('.editData').on('click', function () {
         $('#modal-type').removeClass("modal-lg").addClass("modal-xl");
         $('#formModalLabel').html('Edit Mahasiswa - ');
-        $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Edit Data');
+        $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Edit Data').attr('disabled', 'disabled');
         $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/updateData')
         $('#extendedData').removeClass("d-none").addClass("d");
         $('#standardData').removeClass("d-none").addClass("d");
-        $('#inputNPM1').attr('required', 'required');
-        $('#inputDate1').attr('required', 'required');
-        $('#inputUsername1').attr('required', 'required');
-        $('#inputPhoto1').attr('required', 'required');
         $('#forValidate').removeClass("d-block").addClass("d-none");
+        $('#hiddenID').addClass("d");
+        $('#inputCheckRePassword1').removeAttr('disabled', 'disabled');
+        $('#formCheckRePassword1').addClass('d').removeClass('d-none');
+        
+        $('#hiddenID').attr('required', 'required');
+        $('#inputNPM1').attr('required', 'required');
+        $('#inputName1').attr('required', 'required');
+        $('#inputDepartment1').attr('required', 'required');
+        $('#inputRegistType').attr('required', 'required');
+        $('#inputDate1').attr('required', 'required');
+        $('#inputGenderType').attr('required', 'required');
+        $('#inputReligion1').attr('required', 'required');
+        $('#inputAddress1').attr('required', 'required');
+        $('#inputPhone1').attr('required', 'required');
+        $('#inputEmail1').attr('required', 'required');
+        //$('#inputPhoto1').attr('required', 'required');
+        $('#inputUsername1').attr('required', 'required');
+        $('#inputPassword1').attr('required', 'required');
+        $('#inputPassword2').attr('disabled', 'disabled').removeAttr('required', 'required');
+        $('#inputSemester1').attr('required', 'required');
+        $('#inputDO1').attr('required', 'required');
+        $('#inputDO2').attr('required', 'required');
+        //$('.checkStatues').val('');
         
         const id = $(this).data('id');
         
@@ -107,17 +170,21 @@ $(document).ready(function($) {
                 $('#inputName1').val(data.NAMA_MAHASISWA);
                 $('#inputDepartment1').val(data.JURUSAN_MAHASISWA);
                 $('#inputRegistType').val(data.TIPE_MAHASISWA);
+                $('#inputSemester1').val(data.SEMESTER_MAHASISWA);
                 $('#inputDate1').val(data.TTL_MAHASISWA);
                 $('#inputGenderType').val(data.JK_MAHASISWA);
                 $('#inputReligion1').val(data.AGAMA_MAHASISWA);
                 $('#inputAddress1').val(data.ALAMAT_MAHASISWA);
                 $('#inputPhone1').val(data.NHP_MAHASISWA);
                 $('#inputEmail1').val(data.EMAIL_MAHASISWA);
-                $('#inputPhoto1').val(data.FOTO_MAHASISWA);
+                //$('#inputPhoto1').val(data.FOTO_MAHASISWA);
                 $('#inputUsername1').val(data.USERNAME_MAHASISWA);
                 $('#inputPassword1').val(data.PASSWORD_MAHASISWA);
+                //$('#inputDO1').val(data.DO_MAHASISWA);
+                //$('#inputDO2').val(data.DO_MAHASISWA);
+                $('.checkStatues').checked().val(data.STATUS_MAHASISWA);
                 
-                var checkStatues = data.STATUS_MAHASISWA;
+                /* var checkStatues = data.STATUS_MAHASISWA;
                 var splittedStatues = checkStatues.split(",");
                 
                 for (var i = 0; i < splittedStatues.length; i++) {
@@ -125,21 +192,59 @@ $(document).ready(function($) {
                         $('.checkStatues').attr("value") === splittedStatues;
                     }).attr('checked', 'checked');
                     
-                }
+                } */
                 // Bug for this version.
             }
         });
+        
+        $('#inputCheckRePassword1').change(function() {
+            if ($('#inputCheckRePassword1:checked').length > 0) {
+                $('#inputPassword2').removeAttr('disabled', 'disabled').attr('required', 'required');
+            } else {
+                $('#inputPassword2').removeAttr('required', 'required').attr('disabled', 'disabled');
+            }
+        });
+        
+        $('#inputSemester1').on('input', function () {
+            $('#detailSemester1').html('Semester Mahasiswa: ' + $('#inputSemester1').val());
+        });
+        
+        $('#inputCheckAgreement1').change(function() {
+            if ($('#inputCheckAgreement1:checked').length > 0) {
+                $('#buttonData').removeAttr('disabled', 'disabled');
+            } else {
+                $('#buttonData').attr('disabled', 'disabled');
+            }
+        });
     });
-    
+}); 
+
+$(document).ready(function() {       
     // Delete Modal
     $('.deleteData').on('click', function () {
         $('#modal-type').removeClass("modal-lg").removeClass("modal-xl");
         $('#formModalLabel').html('Hapus Mahasiswa - ');
-        $('#buttonData').addClass("btn-danger").removeClass("btn-primary").html('Hapus Data');
+        $('#buttonData').addClass("btn-danger").removeClass("btn-primary").html('Hapus Data').attr('disabled', 'disabled');
         $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/deleteData')
         $('#extendedData').removeClass("d").addClass("d-none");
         $('#standardData').removeClass("d").addClass("d-none");
-        $('#hiddenID').addClass("d");
+        $('#hiddenID').addClass("d").attr('required', 'required');
+        
+        $('#inputNPM1').removeAttr('required', 'required');
+        $('#inputName1').removeAttr('required', 'required');
+        $('#inputDepartment1').removeAttr('required', 'required');
+        $('#inputRegistType').removeAttr('required', 'required');
+        $('#inputDate1').removeAttr('required', 'required');
+        $('#inputGenderType').removeAttr('required', 'required');
+        $('#inputReligion1').removeAttr('required', 'required');
+        $('#inputAddress1').removeAttr('required', 'required');
+        $('#inputPhone1').removeAttr('required', 'required');
+        $('#inputEmail1').removeAttr('required', 'required');
+        //$('#inputPhoto1').removeAttr('required', 'required');
+        $('#inputUsername1').removeAttr('required', 'required');
+        $('#inputPassword1').removeAttr('required', 'required');
+        $('#inputPassword2').removeAttr('required', 'required');
+        $('.checkStatues').removeAttr('required', 'required');
         
         const id = $(this).data('id');
         
@@ -158,10 +263,20 @@ $(document).ready(function($) {
                 
                 $('#hiddenID').val(data.ID_MAHASISWA);
                 $('#forValidate').addClass("d-block").html('Hapus data ').append(data.NAMA_MAHASISWA).append('?');
+                
+                $('#inputCheckAgreement1').change(function() {
+                    if ($('#inputCheckAgreement1:checked').length > 0) {
+                        $('#buttonData').removeAttr('disabled', 'disabled');
+                    } else {
+                        $('#buttonData').attr('disabled', 'disabled');
+                    }
+                });
             }
         });
     });
-    
+}); 
+
+$(document).ready(function() {       
     // Verify Inputs
     $("#inputNPM1").keyup(function () {
         if ($("#inputNPM1").val()) {
@@ -285,7 +400,9 @@ $(document).ready(function($) {
     });
 
     // checkStatues1
-    
+}); 
+
+$(document).ready(function() {    
     // Agreement Checkbox
     enabledCheck = document.getElementById('customCheck1').checked;
     if(enabledCheck){
@@ -294,7 +411,9 @@ $(document).ready(function($) {
     else {
         document.getElementById('submit_all').setAttribute('disabled');
     }; 
-    
+}); 
+
+$(document).ready(function() {        
     // Library Module
     // Waves
     Waves.init();
@@ -302,6 +421,9 @@ $(document).ready(function($) {
     Waves.attach('.card', ['waves-float']);
     Waves.attach('.img-fluid', ['waves-float']);
     Waves.attach('.toast', ['waves-float']);
+}); 
+
+$(document).ready(function() {    
     // Toats
     if($('.toast')) {
         $('.toast').toast('show');
@@ -309,9 +431,17 @@ $(document).ready(function($) {
     else {
         $('.toast').toast('hide');
     }
+}); 
+
+$(document).ready(function() {    
     // Wow
     new WOW().init();
 }); // End of use strict
+
+$(document).ready(function() {
+    // dataTables
+    $('#dataTable').DataTable();
+}); 
 
 // AutoHide DOM
 document.addEventListener("DOMContentLoaded", function(){
@@ -372,3 +502,4 @@ document.addEventListener("DOMContentLoaded", function(){
         }); 
     }
 }); 
+

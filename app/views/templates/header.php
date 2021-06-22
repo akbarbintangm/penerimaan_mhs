@@ -9,7 +9,8 @@
     <!-- Library -->
     <link rel="stylesheet" href="<?= BASEURL ?>/assets/vendor/animate/animate.min.css">
     <link rel="stylesheet" href="<?= BASEURL ?>/assets/vendor/waves/dist/waves.min.css">
-    
+    <link rel="stylesheet" href="<?= BASEURL ?>/assets/vendor/datatables/dataTables.bootstrap4.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= BASEURL ?>/library/css/main.min.css">
 

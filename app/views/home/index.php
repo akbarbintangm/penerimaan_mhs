@@ -4,17 +4,18 @@
             <div class="col-lg text-left">
                 <h3 class="font-weight-light" id="infoTable">Data Mahasiswa</h3>
                 <label class="text-secondary" for="infoTable">Klik <i class="font-weight-bold">Edit</i> atau <i class="font-weight-bold">Hapus</i> jika ingin mengubahnya.</label>
+                <a href="<?= BASEURL; ?>/home/" class="btn btn btn-info rounded shadow">Beranda</a>
                 <a href="" class="btn btn btn-primary rounded shadow">Refresh Data</a>
                 <a data-toggle="modal" data-target="#formModal" class="btn btn btn-warning rounded shadow addData" id="addData">Tambah Data</a>
-                <br>
-                <div class="row justify-content-end mt-5">
+                <br><br><br>
+                <div class="row justify-content-end mt-5 d-none">
                     <div class="col-lg-6">
                         <form action="<?= BASEURL; ?>/home/searchData" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <input type="name" name="inputSearch1" class="form-control shadow" id="inputSearch1" placeholder="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-label="Cari Nama Mahasiswa atau NPM Mahasiswa" aria-describedby="searchData" autocomplete="off">
                                     <div class="input-group-append">
-                                        <button type="button" name="searchData" class="btn btn-primary shadow" id="searchData">Cari</button>
+                                        <button type="submit" name="searchData" class="btn btn-primary shadow" id="searchData">Cari</button>
                                     </div>
                                 </div>
                             </div>
@@ -25,37 +26,52 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <table class="text-left table table-hover table-responsive-xl">
-                            <thead class="bg-dark text-light text-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">NPM</th>
-                                    <th scope="col">Nama Mahasiswa</th>
-                                    <th scope="col">Jurusan</th>
-                                    <th scope="col" colspan="3">Aksi</th>
-                                </tr>
-                            </thead>
-                                
-                            <tbody>
-                                <?php $no=1; foreach( $data['mahasiswa'] as $rowMahasiswa) : ?>
-                                    <?php if( isset($rowMahasiswa)) { ?>
+                        <div class="table-responsive">
+                            <table id="dataTable" class="text-left table table-hover display">
+                                <caption></caption>
+                                <thead class="bg-dark text-light text-center">
                                     <tr>
-                                        <td scope="row"><?= $no++ ?></td>
-                                        <td><?php if($rowMahasiswa['NPM_MAHASISWA'] == '') { echo 'Tidak ada Data';} else { echo $rowMahasiswa['NPM_MAHASISWA'];} ?></td>
-                                        <td><?= $rowMahasiswa['NAMA_MAHASISWA']; ?></td>
-                                        <td><?= $rowMahasiswa['JURUSAN_MAHASISWA']; ?></td>
-                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/viewData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" class="btn btn-success shadow rounded btn-block d-block">LIHAT</a></td>
-                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/updateData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-primary shadow rounded btn-block d-block editData" id="editData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">EDIT</a></td>
-                                        <td class="text-center"><a href="<?= BASEURL; ?>/home/deleteData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-danger shadow rounded btn-block d-block deleteData" id="deleteData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">HAPUS</a></td>
+                                        <th scope="col">#</th>
+                                        <th scope="col">NPM</th>
+                                        <th scope="col">Nama Mahasiswa</th>
+                                        <th scope="col">Jurusan</th>
+                                        <th scope="col">Lihat</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Hapus</th>
                                     </tr>
-                                    <?php }
-                                    else { ?>
+                                </thead>
+                                <tfoot class="bg-dark text-light text-center">
                                     <tr>
-                                        <td scope="" colspan="">Tidak ada data.</td>
+                                        <th scope="col">#</th>
+                                        <th scope="col">NPM</th>
+                                        <th scope="col">Nama Mahasiswa</th>
+                                        <th scope="col">Jurusan</th>
+                                        <th scope="col">Lihat</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Hapus</th>
                                     </tr>
-                                <?php } endforeach; ?>
-                            </tbody>
-                        </table>
+                                </tfoot>
+                                <tbody>
+                                    <?php $no=1; foreach( $data['mahasiswa'] as $rowMahasiswa) : ?>
+                                        <?php if( isset($rowMahasiswa)) { ?>
+                                        <tr>
+                                            <td scope="row"><?= $no++ ?></td>
+                                            <td><?php if($rowMahasiswa['NPM_MAHASISWA'] == '') { echo 'Tidak ada Data';} else { echo $rowMahasiswa['NPM_MAHASISWA'];} ?></td>
+                                            <td><?= $rowMahasiswa['NAMA_MAHASISWA']; ?></td>
+                                            <td><?= $rowMahasiswa['JURUSAN_MAHASISWA']; ?></td>
+                                            <td class="text-center"><a href="<?= BASEURL; ?>/home/viewData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" class="btn btn-success shadow rounded btn-block d-block">LIHAT</a></td>
+                                            <td class="text-center"><a href="<?= BASEURL; ?>/home/updateData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-primary shadow rounded btn-block d-block editData" id="editData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">EDIT</a></td>
+                                            <td class="text-center"><a href="<?= BASEURL; ?>/home/deleteData/<?= $rowMahasiswa['ID_MAHASISWA']; ?>" data-toggle="modal" data-target="#formModal" class="btn btn-danger shadow rounded btn-block d-block deleteData" id="deleteData" data-id="<?= $rowMahasiswa['ID_MAHASISWA']; ?>">HAPUS</a></td>
+                                        </tr>
+                                        <?php }
+                                        else { ?>
+                                        <tr>
+                                            <td scope="" colspan="">Tidak ada data.</td>
+                                        </tr>
+                                    <?php } endforeach; ?>
+                                </tbody>
+                            </table>
+                        
                     </div>  
                 </div>
             </div>
@@ -77,7 +93,7 @@
                     <div class="modal-body bg-light text-dark">
                         <p id="forValidate"></p>
                         <div class="row" id="standardData">
-                            <div class="col-lg">
+                            <div class="col-lg" id="standardData">
                                 <div class="form-group">
                                     <label for="inputName1">Nama Mahasiswa</label>
                                     <input type="name" name="inputName1" class="form-control shadow" id="inputName1" placeholder="Masukkan Nama" aria-describedby="nameHelp" required="required">
@@ -100,7 +116,7 @@
                                     <textarea type="address" name="inputAddress1" class="form-control shadow" id="inputAddress1" placeholder="Masukkan Alamat" aria-describedby="addressHelp" required="required" style="height: 125px;"></textarea>
                                 </div>
                             </div>
-                            <div class="col-lg">
+                            <div class="col-lg" id="standardData">
                                 <div class="form-group">
                                     <label for="inputReligion1">Agama Mahasiswa</label>
                                     <select class="custom-select shadow" name="inputReligion1" id="inputReligion1" required="required">
@@ -154,8 +170,18 @@
                                     <label for="inputPassword2">Password Ulang</label>
                                     <input type="password" name="inputPassword2" class="form-control shadow" id="inputPassword2" placeholder="Masukkan Password" aria-describedby="repasswordHelp" required="required">
                                 </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox mt-1" id="formCheckRePassword1">
+                                        <input type="checkbox" class="custom-control-input inputCheckRePassword" id="inputCheckRePassword1" name="changePassword[]" value="Ganti Password">
+                                        <label class="custom-control-label" for="inputCheckRePassword1">Ganti Password.</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg" id="extendedData">
+                                <div class="form-group">
+                                    <label for="inputSemester1" id="detailSemester1">Semester Mahasiswa: 0</label>
+                                    <input type="range" name="inputSemester1" class="custom-range inputSemester" min="1" max="8" step="1" id="inputSemester1" list="inputSemester1" required="required">
+                                </div>
                                 <div class="form-group">
                                     <label for="inputNPM1">NPM Mahasiswa</label>
                                     <input type="number" name="inputNPM1" class="form-control shadow" id="inputNPM1" placeholder="Masukkan NPM Mahasiswa" aria-describedby="npmHelp" required="required">
@@ -170,7 +196,7 @@
                                 </div>
                                 <p class="mb-2">Foto Mahasiswa</p>
                                 <div class="custom-file">
-                                    <input type="file" name="inputPhoto1" class="custom-file-input shadow" id="inputPhoto1" placeholder="Pilih File..." aria-describedby="photoHelp" required="required">
+                                    <input type="file" name="inputPhoto1" class="custom-file-input shadow" id="inputPhoto1" placeholder="Pilih File..." aria-describedby="photoHelp" required="required" disabled="disabled">
                                     <label class="custom-file-label shadow" for="inputPhoto1" id="inputPhoto">Pilih file...</label>
                                 </div>
                                 <div class="form-group mt-3">
@@ -184,16 +210,39 @@
                                         <label class="custom-control-label" for="inputCheckData2">Mahasiswa Tetap</label>
                                     </div>
                                     <div class="custom-control custom-checkbox mt-1">
-                                        <input type="checkbox" class="custom-control-input checkStatues" id="inputCheckData3" name="checkStatues1[]" value="Mahasiswa Drop Out">
-                                        <label class="custom-control-label" for="inputCheckData3">Mahasiswa Drop Out</label>
+                                        <input type="checkbox" class="custom-control-input checkStatues" id="inputCheckData3" name="checkStatues1[]" value="Mahasiswa Transfer">
+                                        <label class="custom-control-label" for="inputCheckData3">Mahasiswa Transfer</label>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="custom-control custom-radio mt-1">
+                                        <input type="radio" class="custom-control-input checkDO" id="inputDO1" name="checkDO" value="Tidak Drop Out">
+                                        <label class="custom-control-label" for="inputDO1">Tidak Drop Out</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mt-1">
+                                        <input type="radio" class="custom-control-input checkDO" id="inputDO2" name="checkDO" value="Mahasiswa Drop Out">
+                                        <label class="custom-control-label" for="inputDO2">Mahasiswa Drop Out</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer bg-light text-dark">
-                        <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary shadow" name="buttonData" id="buttonData">Input Data</button>
+                    <div class="modal-body bg-light text-dark">
+                        <div class="row">
+                            <div class="col text-left">
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox mt-1">
+                                        <input type="checkbox" class="custom-control-input inputCheckAgreement" id="inputCheckAgreement1" name="checkAgreement[]" value="Menyetujui Persyaratan">
+                                        <label class="custom-control-label" for="inputCheckAgreement1">Saya telah menyetujui Persyaratan dan Ketentuan.</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col text-right">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary shadow" name="buttonData" id="buttonData">Input Data</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

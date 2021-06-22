@@ -13,12 +13,13 @@
         }
         
         public function addIdMHS($data) {
-            $this->db->query('INSERT INTO '. $this->tablePrimary .' VALUES (:ID_MAHASISWA, :NPM_MAHASISWA, :NAMA_MAHASISWA, :JURUSAN_MAHASISWA, :TIPE_MAHASISWA, :TTL_MAHASISWA, :JK_MAHASISWA, :AGAMA_MAHASISWA, :ALAMAT_MAHASISWA, :NHP_MAHASISWA, :EMAIL_MAHASISWA, :FOTO_MAHASISWA, :USERNAME_MAHASISWA, :PASSWORD_MAHASISWA, :STATUS_MAHASISWA)');
+            $this->db->query('INSERT INTO '. $this->tablePrimary .' VALUES (:ID_MAHASISWA, :NPM_MAHASISWA, :NAMA_MAHASISWA, :JURUSAN_MAHASISWA, :SEMESTER_MAHASISWA, :TIPE_MAHASISWA, :TTL_MAHASISWA, :JK_MAHASISWA, :AGAMA_MAHASISWA, :ALAMAT_MAHASISWA, :NHP_MAHASISWA, :EMAIL_MAHASISWA, :FOTO_MAHASISWA, :USERNAME_MAHASISWA, :PASSWORD_MAHASISWA, :STATUS_MAHASISWA, :DO_MAHASISWA)');
             
             $this->db->bind('ID_MAHASISWA', '');
             $this->db->bind('NPM_MAHASISWA', null);
             $this->db->bind('NAMA_MAHASISWA', $data['inputName1']);
             $this->db->bind('JURUSAN_MAHASISWA', $data['inputDepartment1']);
+            $this->db->bind('SEMESTER_MAHASISWA', $data['inputSemester1']);
             $this->db->bind('TIPE_MAHASISWA', $data['inputRegistType']);
             $this->db->bind('TTL_MAHASISWA', null);
             $this->db->bind('JK_MAHASISWA', $data['inputGenderType']);
@@ -30,7 +31,8 @@
             $this->db->bind('USERNAME_MAHASISWA', null);
             $this->db->bind('PASSWORD_MAHASISWA', $data['inputPassword1']);
             $this->db->bind('STATUS_MAHASISWA', 'Mahasiswa Baru');
-            
+            $this->db->bind('DO_MAHASISWA', 'Tidak Drop Out');
+
             $this->db->execute();
             
             return $this->db->rowCount();
@@ -50,6 +52,7 @@
             NPM_MAHASISWA = :NPM_MAHASISWA, 
             NAMA_MAHASISWA = :NAMA_MAHASISWA, 
             JURUSAN_MAHASISWA = :JURUSAN_MAHASISWA, 
+            SEMESTER_MAHASISWA = :SEMESTER_MAHASISWA, 
             TIPE_MAHASISWA = :TIPE_MAHASISWA, 
             TTL_MAHASISWA = :TTL_MAHASISWA, 
             JK_MAHASISWA = :JK_MAHASISWA, 
@@ -60,13 +63,15 @@
             FOTO_MAHASISWA = :FOTO_MAHASISWA, 
             USERNAME_MAHASISWA = :USERNAME_MAHASISWA, 
             PASSWORD_MAHASISWA = :PASSWORD_MAHASISWA, 
-            STATUS_MAHASISWA = :STATUS_MAHASISWA 
+            STATUS_MAHASISWA = :STATUS_MAHASISWA, 
+            DO_MAHASISWA = :DO_MAHASISWA
             WHERE ID_MAHASISWA = :ID_MAHASISWA');
             
             $this->db->bind('ID_MAHASISWA', $data['hiddenID']);
             $this->db->bind('NPM_MAHASISWA', $data['inputNPM1']);
             $this->db->bind('NAMA_MAHASISWA', $data['inputName1']);
             $this->db->bind('JURUSAN_MAHASISWA', $data['inputDepartment1']);
+            $this->db->bind('SEMESTER_MAHASISWA', $data['inputSemester1']);
             $this->db->bind('TIPE_MAHASISWA', $data['inputRegistType']);
             $this->db->bind('TTL_MAHASISWA', $data['inputDate1']);
             $this->db->bind('JK_MAHASISWA', $data['inputGenderType']);
@@ -74,10 +79,11 @@
             $this->db->bind('ALAMAT_MAHASISWA', $data['inputAddress1']);
             $this->db->bind('NHP_MAHASISWA', $data['inputPhone1']);
             $this->db->bind('EMAIL_MAHASISWA', $data['inputEmail1']);
-            $this->db->bind('FOTO_MAHASISWA', $data['inputPhoto1']);
+            $this->db->bind('FOTO_MAHASISWA', null);
             $this->db->bind('USERNAME_MAHASISWA', $data['inputUsername1']);
             $this->db->bind('PASSWORD_MAHASISWA', $data['inputPassword1']);
             $this->db->bind('STATUS_MAHASISWA', $checkStatues1);
+            $this->db->bind('DO_MAHASISWA', $data['checkDO']);
             
             $this->db->execute();
             
@@ -95,8 +101,5 @@
             $this->db->bind('searchInput', "%$searchInput%");
             return $this->db->resultAll();
         }   
-        public function file_details($data) {
-            $this->db->insert('image_table', $data);
-        }
     }
 ?>
