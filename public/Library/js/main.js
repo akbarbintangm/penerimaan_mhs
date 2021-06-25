@@ -193,7 +193,7 @@ $(document).ready(function() {
                     }).attr('checked', 'checked');
                     
                 } */
-                // Bug for this version.
+                // Bug for this version. please add the array splittedStatues[$var].
             }
         });
         
