@@ -48,6 +48,31 @@ $(document).ready(function() {
     });
 }); 
 
+$(document).ready(function () {
+    load_data();
+    
+    function load_data(query) {
+        $.ajax({
+            url: "http://localhost:8080/penerimaan_mhs/public/home/searchData",
+            method:"POST",
+            data:{NAMA_MAHASISWA : query},
+            success:function(data) {
+                $('#resultData').html(data);
+            }
+        });
+    }
+    
+    $('#inputSearch1').keyup(function () {
+        var search = $(this).val();
+        if (search != '') {
+            load_data(search);
+        }
+        else {
+            load_data();
+        }
+    });
+});
+
 $(document).ready(function() {        
     // Modal Add & Edit 
     // Add Modal
