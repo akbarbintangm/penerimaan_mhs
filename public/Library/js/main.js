@@ -53,7 +53,7 @@ $(document).ready(function () {
     
     function load_data(query) {
         $.ajax({
-            url: "http://localhost:8080/penerimaan_mhs/public/home/searchData",
+            url: "http://localhost:8181/penerimaan_mhs/public/home/searchData",
             method:"POST",
             data:{NAMA_MAHASISWA : query},
             success:function(data) {
@@ -79,7 +79,7 @@ $(document).ready(function() {
     $('.addData').on('click', function () {
         $('#modal-type').removeClass("modal-xl").addClass("modal-lg");
         $('#formModalLabel').html('Tambah Data Mahasiswa Baru');
-        $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/addData');
+        $('#formMHS').attr('action', 'http://localhost:8181/penerimaan_mhs/public/home/addData');
         $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Tambah Data').attr('disabled', 'disabled');
         $('#extendedData').removeClass("d").addClass("d-none");
         $('#standardData').removeClass("d-none").addClass("d");
@@ -144,7 +144,7 @@ $(document).ready(function() {
         $('#modal-type').removeClass("modal-lg").addClass("modal-xl");
         $('#formModalLabel').html('Edit Mahasiswa - ');
         $('#buttonData').addClass("btn-primary").removeClass("btn-danger").html('Edit Data').attr('disabled', 'disabled');
-        $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/updateData')
+        $('#formMHS').attr('action', 'http://localhost:8181/penerimaan_mhs/public/home/updateData')
         $('#extendedData').removeClass("d-none").addClass("d");
         $('#standardData').removeClass("d-none").addClass("d");
         $('#forValidate').removeClass("d-block").addClass("d-none");
@@ -175,7 +175,7 @@ $(document).ready(function() {
         const id = $(this).data('id');
         
         $.ajax({
-            url: 'http://localhost:8080/penerimaan_mhs/public/home/getInfoData',
+            url: 'http://localhost:8181/penerimaan_mhs/public/home/getInfoData',
             data: {ID_MAHASISWA : id},
             method: 'post',
             dataType: 'json',
@@ -250,7 +250,7 @@ $(document).ready(function() {
         $('#modal-type').removeClass("modal-lg").removeClass("modal-xl");
         $('#formModalLabel').html('Hapus Mahasiswa - ');
         $('#buttonData').addClass("btn-danger").removeClass("btn-primary").html('Hapus Data').attr('disabled', 'disabled');
-        $('#formMHS').attr('action', 'http://localhost:8080/penerimaan_mhs/public/home/deleteData')
+        $('#formMHS').attr('action', 'http://localhost:8181/penerimaan_mhs/public/home/deleteData')
         $('#extendedData').removeClass("d").addClass("d-none");
         $('#standardData').removeClass("d").addClass("d-none");
         $('#hiddenID').addClass("d").attr('required', 'required');
@@ -274,7 +274,7 @@ $(document).ready(function() {
         const id = $(this).data('id');
         
         $.ajax({
-            url: 'http://localhost:8080/penerimaan_mhs/public/home/getInfoData',
+            url: 'http://localhost:8181/penerimaan_mhs/public/home/getInfoData',
             data: {ID_MAHASISWA : id},
             method: 'post',
             dataType: 'json',

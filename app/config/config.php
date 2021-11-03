@@ -1,6 +1,6 @@
 <?php
     // BASE URL
-    define('BASEURL', 'http://localhost:8080/penerimaan_mhs/public');
+    define('BASEURL', 'http://localhost:8181/penerimaan_mhs/public');
     
     // DATABASE
     define('DB_HOST', 'localhost');
