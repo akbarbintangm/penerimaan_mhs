@@ -2,6 +2,7 @@
     class Database {
         // Database Variables
         private $host = DB_HOST;
+        private $port = DB_PORT;
         private $user = DB_USER;
         private $password = DB_PASS;
         private $db_name = DB_NAME;
@@ -11,7 +12,7 @@
         
         public function __construct() {
             // Data Source Name / DSN
-            $dsn = 'mysql:host='.$this->host.';dbname='.$this->db_name.'';
+            $dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->db_name.'';
             
             $option = [
                 PDO::ATTR_PERSISTENT => true,
